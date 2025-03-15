@@ -1,0 +1,146 @@
+[
+    {
+        "id": "e1",
+        "name": "Ultra-Wide Curved Monitor",
+        "description": "34-inch 144Hz curved gaming monitor with OLED tech.",
+        "price": 899.99,
+        "image": "https://images.unsplash.com/photo-1527443224154-c4a3942d3acf?auto=format&fit=crop&q=80&w=800",
+        "category": "Electronics",
+        "brand": "Vision",
+        "stock": 5,
+        "isNew": true
+    },
+    {
+        "id": "e2",
+        "name": "Noise Cancelling Headphones",
+        "description": "Active noise cancellation with 40h battery life.",
+        "price": 299.99,
+        "image": "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&q=80&w=800",
+        "category": "Electronics",
+        "brand": "Sonic",
+        "stock": 12
+    },
+    {
+        "id": "e3",
+        "name": "Mechanical RGB Keyboard",
+        "description": "Hot-swappable switches with customizable lighting.",
+        "price": 149.00,
+        "image": "https://images.unsplash.com/photo-1511467687858-23d96c32e4ae?auto=format&fit=crop&q=80&w=800",
+        "category": "Electronics",
+        "brand": "Clicky",
+        "stock": 20
+    },
+    {
+        "id": "e4",
+        "name": "Ergonomic Wireless Mouse",
+        "description": "High precision sensor with ergonomic thumb rest.",
+        "price": 79.99,
+        "image": "https://images.unsplash.com/photo-1527864550417-7fd91fc51a46?auto=format&fit=crop&q=80&w=800",
+        "category": "Electronics",
+        "brand": "Precision",
+        "stock": 35
+    },
+    {
+        "id": "e5",
+        "name": "Portable SSD 2TB",
+        "description": "Rugged external SSD with blazing fast 1000MB/s speeds.",
+        "price": 189.00,
+        "image": "https://images.unsplash.com/photo-1591488320449-011701bb6704?auto=format&fit=crop&q=80&w=800",
+        "category": "Electronics",
+        "brand": "SafeData",
+        "stock": 15
+    },
+    {
+        "id": "e6",
+        "name": "4K Mirrorless Camera",
+        "description": "Professional grade sensor with 4K 60fps video capability.",
+        "price": 1299.00,
+        "image": "https://images.unsplash.com/photo-1516035069371-29a1b244cc32?auto=format&fit=crop&q=80&w=800",
+        "category": "Electronics",
+        "brand": "Optic",
+        "stock": 3,
+        "isNew": true
+    },
+    {
+        "id": "e7",
+        "name": "Smart Watch Series 5",
+        "description": "Health tracking, GPS, and cellular connectivity.",
+        "price": 399.00,
+        "image": "https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&q=80&w=800",
+        "category": "Electronics",
+        "brand": "Pulse",
+        "stock": 10
+    },
+    {
+        "id": "e8",
+        "name": "Drone with 4K Camera",
+        "description": "Foldable quadcopter with 30-min flight time.",
+        "price": 549.00,
+        "image": "https://images.unsplash.com/photo-1524143909107-160759f3f4fd?auto=format&fit=crop&q=80&w=800",
+        "category": "Electronics",
+        "brand": "SkyView",
+        "stock": 7
+    },
+    {
+        "id": "e9",
+        "name": "Bluetooth Soundbar",
+        "description": "Immersive home theater sound in a compact design.",
+        "price": 229.00,
+        "image": "https://images.unsplash.com/photo-1545454675-3531b543be5d?auto=format&fit=crop&q=80&w=800",
+        "category": "Electronics",
+        "brand": "Sonic",
+        "stock": 18
+    },
+    {
+        "id": "e10",
+        "name": "VR Headset Pro",
+        "description": "Next-gen virtual reality with 5K resolution.",
+        "price": 799.00,
+        "image": "https://images.unsplash.com/photo-1622979135225-d2ba269cf1ac?auto=format&fit=crop&q=80&w=800",
+        "category": "Electronics",
+        "brand": "Virtualis",
+        "stock": 5,
+        "isNew": true
+    },
+    {
+        "id": "a1",
+        "name": "Premium Oversized Hoodie",
+        "description": "Heavyweight streetwear hoodie in stone grey.",
+        "price": 85.00,
+        "image": "https://images.unsplash.com/photo-1556821840-3a63f95609a7?auto=format&fit=crop&q=80&w=800",
+        "category": "Apparel",
+        "brand": "Urban",
+        "stock": 45,
+        "isNew": true
+    },
+    {
+        "id": "a2",
+        "name": "Tailored Wool Coat",
+        "description": "Italian wool blend overcoat for winter.",
+        "price": 350.00,
+        "image": "https://images.unsplash.com/photo-1539533377285-b040bf554030?auto=format&fit=crop&q=80&w=800",
+        "category": "Apparel",
+        "brand": "Classy",
+        "stock": 10
+    },
+    {
+        "id": "s1",
+        "name": "Cloud-Run Sneakers",
+        "description": "Ultimate comfort for long distance running.",
+        "price": 155.00,
+        "image": "https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&q=80&w=800",
+        "category": "Shoes",
+        "brand": "Stride",
+        "stock": 20
+    },
+    {
+        "id": "h1",
+        "name": "Ceramic Pour-Over Set",
+        "description": "Handcrafted ceramic coffee dripper and carafe.",
+        "price": 45.00,
+        "image": "https://images.unsplash.com/photo-1544197150-b99a580bb7a8?auto=format&fit=crop&q=80&w=800",
+        "category": "Home",
+        "brand": "Artisan",
+        "stock": 20
+    }
+]
