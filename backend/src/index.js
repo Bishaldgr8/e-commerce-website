@@ -42,6 +42,11 @@ app.get('/api/v1/health', (req, res) => {
 // Port
 const PORT = process.env.PORT || 5000;
 
-app.listen(PORT, () => {
-    console.log(`Server running in ${process.env.NODE_ENV} mode on port ${PORT}`);
-});
+// For Vercel serverless
+if (process.env.VERCEL) {
+    export default app;
+} else {
+    app.listen(PORT, () => {
+        console.log(`Server running in ${process.env.NODE_ENV} mode on port ${PORT}`);
+    });
+}
