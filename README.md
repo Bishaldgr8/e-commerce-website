@@ -79,6 +79,26 @@ JWT_SECRET=your_jwt_secret_here
 MONGODB_URI=your_mongodb_connection_string
 ```
 
+## Deployment
+
+This project is ready to deploy to Vercel! See [DEPLOYMENT.md](./DEPLOYMENT.md) for detailed instructions.
+
+### Quick Deploy to Vercel
+
+**Frontend:**
+1. Import repository to Vercel
+2. Set Root Directory: `frontend`
+3. Add environment variable: `VITE_API_URL`
+4. Deploy
+
+**Backend:**
+1. Import repository to Vercel (new project)
+2. Set Root Directory: `backend`
+3. Add environment variables (MongoDB URI, JWT Secret, etc.)
+4. Deploy
+
+For complete step-by-step instructions, see [DEPLOYMENT.md](./DEPLOYMENT.md)
+
 ## Developer
 
 **Made with precision by BishalB**
