@@ -11,11 +11,26 @@ dotenv.config();
 
 const app = express();
 
+
+// Enable CORS - Allow all origins for Vercel deployment
+app.use(cors({
+    origin: true, // Allow all origins
+    credentials: true,
+    methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization']
+}));
+
 // Body parser
+
 app.use(express.json());
 
 // Database connection middleware for Vercel serverless
 app.use(async (req, res, next) => {
+    // Skip DB connection for preflight requests
+    if (req.method === 'OPTIONS') {
+        return next();
+    }
+
     try {
         await connectDB();
         next();
@@ -25,13 +40,6 @@ app.use(async (req, res, next) => {
     }
 });
 
-// Enable CORS - Allow all origins for Vercel deployment
-app.use(cors({
-    origin: true, // Allow all origins
-    credentials: true,
-    methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
-    allowedHeaders: ['Content-Type', 'Authorization']
-}));
 
 // Dev logging middleware
 if (process.env.NODE_ENV === 'development') {
