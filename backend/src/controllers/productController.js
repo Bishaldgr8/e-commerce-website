@@ -1,4 +1,11 @@
 import Product from '../models/Product.js';
+import fs from 'fs';
+import path from 'path';
+import { fileURLToPath } from 'url';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
 
 // @desc    Get all products
 // @route   GET /api/v1/products
@@ -104,6 +111,64 @@ export const getProducts = async (req, res) => {
             data: sortedProducts
         });
     } catch (error) {
+        res.status(500).json({ success: false, message: error.message });
+    }
+};
+
+// @desc    Seed products
+// @route   POST /api/v1/products/seed
+// @access  Public
+export const seedProducts = async (req, res) => {
+    try {
+        const count = await Product.countDocuments();
+
+        // If DB not empty and no force flag, return
+        if (count > 0 && !req.body.force) {
+            return res.status(200).json({
+                success: true,
+                message: 'Database already populated',
+                count
+            });
+        }
+
+        // Read data file
+        const dataPath = path.join(__dirname, '../../data/products.json');
+
+        if (!fs.existsSync(dataPath)) {
+            return res.status(404).json({ success: false, message: 'Seed data file not found' });
+        }
+
+        const products = JSON.parse(fs.readFileSync(dataPath, 'utf-8'));
+
+        // Delete existing if force is true
+        if (req.body.force) {
+            await Product.deleteMany({});
+        } else if (count > 0) {
+            return res.status(200).json({ success: true, count });
+        }
+
+        // Insert new products
+        // Handle products that might need specific ID formatting or additional fields
+        const productsToInsert = products.map(p => ({
+            ...p,
+            // Ensure ID is acceptable (if your schema allows custom _id or using default)
+            // If your schema uses MongoDB ObjectIds, you might want to remove explicit string IDs 
+            // or keep them if you're using String type for _id.
+            // Based on types.ts, frontend expects string 'id', backend likely uses '_id'.
+            // Let's safe-guard by removing 'id' to let Mongo generate '_id' 
+            // OR if your schema defines _id as String, keep it.
+            // Looking at productController.js, it seems standard Mongoose.
+        }));
+
+        await Product.insertMany(products);
+
+        res.status(201).json({
+            success: true,
+            message: 'Products seeded successfully',
+            count: products.length
+        });
+    } catch (error) {
+        console.error(error);
         res.status(500).json({ success: false, message: error.message });
     }
 };

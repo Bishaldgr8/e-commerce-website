@@ -30,6 +30,9 @@ export const CatalogProvider = ({ children }: { children: React.ReactNode }) => 
                 id: p._id || p.id
             }));
             setProducts(productsWithId);
+            if (productsWithId.length === 0) {
+                console.warn('No products found from API. The database might be empty.');
+            }
         } catch (error) {
             console.error('Failed to fetch products:', error);
             toast.error('Failed to load products');

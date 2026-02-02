@@ -4,13 +4,16 @@ import {
     getProduct,
     createProduct,
     updateProduct,
-    deleteProduct
+    deleteProduct,
+    seedProducts
 } from '../controllers/productController.js';
 import { protect, authorize } from '../middleware/authMiddleware.js';
 
 const router = express.Router();
 
+router.post('/seed', seedProducts);
 router.get('/', getProducts);
+
 router.get('/:id', getProduct);
 
 // Protected routes for sellers/admins
