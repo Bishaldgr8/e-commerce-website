@@ -4,9 +4,9 @@ A modern, feature-rich e-commerce platform built with React, TypeScript, Express
 
 ## 🌐 Live Demo
 
-**Frontend (Live):** [https://e-commerce-website-ioxi.vercel.app](https://e-commerce-website-ioxi.vercel.app)
+**Frontend (Live):** [https://e-commerce-website-zntj-3ikanb5ta-bishal-boros-projects.vercel.app](https://e-commerce-website-zntj-3ikanb5ta-bishal-boros-projects.vercel.app)
 
-> **Note:** Backend deployment is currently in progress. Full functionality including authentication and checkout will be available soon.
+> **Note:** Backend is deployed at [https://e-commerce-website-iota-beige.vercel.app](https://e-commerce-website-iota-beige.vercel.app). Full functionality is available.
 
 ---
 
@@ -287,7 +287,7 @@ MIT License - feel free to use this project for learning or commercial purposes.
 
 - 📧 Email: [bishalboro10062003@gmail.com](mailto:bishalboro10062003@gmail.com)
 - 🔗 GitHub: [@Bishaldgr8](https://github.com/Bishaldgr8)
-- 🌐 Live Demo: [The Secret Shop](https://e-commerce-website-ioxi.vercel.app)
+- 🌐 Live Demo: [The Secret Shop](https://e-commerce-website-zntj-3ikanb5ta-bishal-boros-projects.vercel.app)
 
 ---
 
