@@ -2,6 +2,7 @@ import Product from '../models/Product.js';
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
+import mongoose from 'mongoose';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -158,6 +159,7 @@ export const seedProducts = async (req, res) => {
             // Let's safe-guard by removing 'id' to let Mongo generate '_id' 
             // OR if your schema defines _id as String, keep it.
             // Looking at productController.js, it seems standard Mongoose.
+            sellerId: new mongoose.Types.ObjectId()
         }));
 
         await Product.insertMany(products);
