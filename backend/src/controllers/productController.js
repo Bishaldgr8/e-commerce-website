@@ -162,7 +162,7 @@ export const seedProducts = async (req, res) => {
             sellerId: new mongoose.Types.ObjectId()
         }));
 
-        await Product.insertMany(products);
+        await Product.insertMany(productsToInsert);
 
         res.status(201).json({
             success: true,
