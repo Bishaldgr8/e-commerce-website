@@ -187,7 +187,7 @@ A modern, feature-rich e-commerce platform built with React, TypeScript, Express
 ## 👤 Default Admin Credentials
 
 - **Email**: `admin@secretshop.com`
-- **Password**: `bishal123`
+- **Password**: `********`(contact me for access)
 
 ---
 
