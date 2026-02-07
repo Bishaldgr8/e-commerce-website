@@ -156,6 +156,10 @@
   box-sizing: border-box;
 }
 
+html {
+  font-size: 16px;
+}
+
 body {
   margin: 0;
   font-family: var(--font-body);
@@ -187,6 +191,7 @@ p {
 img {
   max-width: 100%;
   display: block;
+  height: auto;
 }
 
 button {
@@ -199,4 +204,36 @@ a {
   color: inherit;
   text-decoration: none;
   transition: all 0.2s ease;
+}
+
+/* Responsive Typography */
+@media (max-width: 768px) {
+  html {
+    font-size: 14px;
+  }
+  
+  .bg-blob {
+    width: 300px;
+    height: 300px;
+    filter: blur(60px);
+  }
+}
+
+/* Utilities */
+.hidden-mobile {
+  display: block;
+}
+
+.hidden-desktop {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .hidden-mobile {
+    display: none !important;
+  }
+  
+  .hidden-desktop {
+    display: block !important;
+  }
 }

@@ -4,6 +4,8 @@ import { ProductCard } from '../features/catalog/components/ProductCard';
 import { Input } from '../components/ui/Input';
 import { Button } from '../components/ui/Button';
 import { FishFollowEffect } from '../components/effects/FishFollowEffect';
+import styles from './HomePage.module.css';
+import { clsx } from 'clsx';
 
 export const HomePage = () => {
   const { products } = useCatalog();
@@ -32,35 +34,26 @@ export const HomePage = () => {
   };
 
   return (
-    <div style={{ padding: '2rem 1.5rem', maxWidth: '1280px', margin: '0 auto' }}>
-      <div id="hero" style={{
-        marginBottom: '4rem',
-        padding: '6rem 3rem',
-        position: 'relative',
-        overflow: 'hidden',
-        borderRadius: '2rem',
-        background: 'radial-gradient(circle at 10% 20%, rgb(0, 0, 0) 0%, rgb(15, 23, 42) 90.2%)', // Slate 900
-        color: 'white',
-        boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.5)'
-      }}>
+    <div className={styles.container}>
+      <div id="hero" className={styles.hero}>
         <FishFollowEffect options={{ containerSelector: '#hero', opacity: 0.9 }} />
-        <div style={{ position: 'relative', zIndex: 1 }}>
-          <h1 style={{ fontSize: '4.5rem', fontWeight: 800, letterSpacing: '-0.05em', lineHeight: 1.1, marginBottom: '1.5rem' }}>
-            Elevate Your <span style={{ background: 'linear-gradient(to right, #0ea5e9, #6366f1)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>Lifestyle</span>
+        <div className={styles.heroContent}>
+          <h1 className={styles.heroTitle}>
+            Elevate Your <span className={styles.highlight}>Lifestyle</span>
           </h1>
-          <p style={{ color: 'var(--color-slate-400)', fontSize: '1.25rem', maxWidth: '600px', lineHeight: 1.6 }}>
+          <p className={styles.heroDescription}>
             Discover curated collections from around the globe at The Secret Shop.
             Exclusive products, premium quality, and secret deals.
           </p>
-          <div style={{ marginTop: '3rem', display: 'flex', gap: '1rem' }}>
+          <div className={styles.heroButtons}>
             <Button size="lg" onClick={() => document.getElementById('catalog')?.scrollIntoView({ behavior: 'smooth' })}>Shop Collection</Button>
             <Button size="lg" variant="outline" style={{ border: '1px solid rgba(255,255,255,0.2)', color: 'white' }}>Learn More</Button>
           </div>
         </div>
       </div>
 
-      <div id="catalog" style={{ marginBottom: '2rem', display: 'flex', gap: '1rem', flexWrap: 'wrap', alignItems: 'center', justifyContent: 'space-between' }}>
-        <div style={{ maxWidth: '400px', flex: 1 }}>
+      <div id="catalog" className={styles.catalogHeader}>
+        <div className={styles.searchContainer}>
           <Input
             placeholder="Search by name or brand..."
             value={search}
@@ -71,7 +64,7 @@ export const HomePage = () => {
           />
         </div>
 
-        <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap' }}>
+        <div className={styles.filtersContainer}>
           {categories.map(category => (
             <button
               key={category}
@@ -79,18 +72,7 @@ export const HomePage = () => {
                 setSelectedCategory(category);
                 setVisibleCount(12); // Reset pagination on category change
               }}
-              style={{
-                padding: '0.5rem 1.25rem',
-                borderRadius: '9999px',
-                fontSize: '0.875rem',
-                fontWeight: 600,
-                border: '1px solid var(--color-border)',
-                backgroundColor: selectedCategory === category ? 'var(--color-slate-900)' : 'var(--color-surface)',
-                color: selectedCategory === category ? 'var(--color-slate-50)' : 'var(--color-slate-700)',
-                cursor: 'pointer',
-                transition: 'all 200ms cubic-bezier(0.4, 0, 0.2, 1)',
-                boxShadow: selectedCategory === category ? '0 4px 12px rgba(0,0,0,0.1)' : 'none'
-              }}
+              className={clsx(styles.filterChip, selectedCategory === category && styles.filterChipActive)}
             >
               {category}
             </button>
@@ -98,17 +80,13 @@ export const HomePage = () => {
         </div>
       </div>
 
-      <div style={{
-        display: 'grid',
-        gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))',
-        gap: '2.5rem'
-      }}>
+      <div className={styles.productGrid}>
         {displayProducts.length > 0 ? (
           displayProducts.map((product) => (
             <ProductCard key={product.id} product={product} />
           ))
         ) : (
-          <div style={{ gridColumn: '1 / -1', textAlign: 'center', padding: '6rem 2rem', backgroundColor: 'var(--color-slate-100)', borderRadius: 'var(--radius)' }}>
+          <div className={styles.noResults}>
             <p style={{ fontSize: '1.125rem', color: 'var(--color-slate-500)' }}>No products matches your criteria.</p>
             <Button variant="ghost" onClick={() => { setSearch(''); setSelectedCategory('All'); }} style={{ marginTop: '1rem' }}>Clear all filters</Button>
           </div>
@@ -116,14 +94,10 @@ export const HomePage = () => {
       </div>
 
       {hasMore && (
-        <div style={{ marginTop: '4rem', textAlign: 'center' }}>
+        <div className={styles.loadMoreContainer}>
           <Button
             onClick={handleLoadMore}
-            style={{
-              padding: '0.75rem 3rem',
-              fontSize: '1rem',
-              boxShadow: '0 10px 15px -3px rgba(0, 0, 0, 0.1)'
-            }}
+            className={styles.loadMoreBtn}
           >
             Load More Products
           </Button>

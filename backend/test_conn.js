@@ -2,7 +2,7 @@ import mongoose from 'mongoose';
 import dotenv from 'dotenv';
 import path from 'path';
 
-dotenv.config({ path: './.env' });
+dotenv.config({ path: path.join(process.cwd(), 'backend/.env') });
 
 const testConnection = async () => {
     try {

@@ -1,5 +1,6 @@
-import { Link, NavLink, useNavigate } from 'react-router-dom';
-import { ShoppingBag, User, Search, LogOut, Sun, Moon } from 'lucide-react';
+import { useState, useEffect } from 'react';
+import { Link, NavLink, useNavigate, useLocation } from 'react-router-dom';
+import { ShoppingBag, User, Search, LogOut, Sun, Moon, Menu, X } from 'lucide-react';
 import { Button } from '../ui/Button';
 import styles from './Header.module.css';
 import { clsx } from 'clsx';
@@ -12,11 +13,60 @@ export const Header = () => {
     const { user, isAuthenticated, logout } = useAuth();
     const { theme, toggleTheme } = useTheme();
     const navigate = useNavigate();
+    const location = useLocation();
+    const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+    // Close menu when route changes
+    useEffect(() => {
+        setIsMenuOpen(false);
+    }, [location]);
+
+    // Prevent scrolling when menu is open
+    useEffect(() => {
+        if (isMenuOpen) {
+            document.body.style.overflow = 'hidden';
+        } else {
+            document.body.style.overflow = 'unset';
+        }
+        return () => {
+            document.body.style.overflow = 'unset';
+        };
+    }, [isMenuOpen]);
 
     const handleLogout = () => {
         logout();
         navigate('/');
     };
+
+    const toggleMenu = () => {
+        setIsMenuOpen(!isMenuOpen);
+    };
+
+    const NavLinks = () => (
+        <>
+            <NavLink to="/" className={({ isActive }) => clsx(styles.navLink, isActive && styles.active)}>
+                Shop
+            </NavLink>
+            <NavLink to="/new-arrivals" className={({ isActive }) => clsx(styles.navLink, isActive && styles.active)}>
+                New Arrivals
+            </NavLink>
+            <NavLink to="/brands" className={({ isActive }) => clsx(styles.navLink, isActive && styles.active)}>
+                Brands
+            </NavLink>
+
+            {isAuthenticated && user?.role === 'admin' && (
+                <NavLink to="/admin" className={({ isActive }) => clsx(styles.navLink, isActive && styles.active)} style={{ color: 'var(--color-primary)' }}>
+                    Admin
+                </NavLink>
+            )}
+
+            {isAuthenticated && user?.role === 'seller' && (
+                <NavLink to="/seller" className={({ isActive }) => clsx(styles.navLink, isActive && styles.active)} style={{ color: 'var(--color-primary)' }}>
+                    Seller
+                </NavLink>
+            )}
+        </>
+    );
 
     return (
         <header className={styles.header}>
@@ -26,35 +76,16 @@ export const Header = () => {
                     THE SECRET SHOP
                 </Link>
 
+                {/* Desktop Navigation */}
                 <nav className={styles.nav}>
-                    <NavLink to="/" className={({ isActive }) => clsx(styles.navLink, isActive && styles.active)}>
-                        Shop
-                    </NavLink>
-                    <NavLink to="/new-arrivals" className={({ isActive }) => clsx(styles.navLink, isActive && styles.active)}>
-                        New Arrivals
-                    </NavLink>
-                    <NavLink to="/brands" className={({ isActive }) => clsx(styles.navLink, isActive && styles.active)}>
-                        Brands
-                    </NavLink>
-
-                    {isAuthenticated && user?.role === 'admin' && (
-                        <NavLink to="/admin" className={({ isActive }) => clsx(styles.navLink, isActive && styles.active)} style={{ color: 'var(--color-primary)' }}>
-                            Admin
-                        </NavLink>
-                    )}
-
-                    {isAuthenticated && user?.role === 'seller' && (
-                        <NavLink to="/seller" className={({ isActive }) => clsx(styles.navLink, isActive && styles.active)} style={{ color: 'var(--color-primary)' }}>
-                            Seller
-                        </NavLink>
-                    )}
+                    <NavLinks />
                 </nav>
 
                 <div className={styles.actions}>
-                    <Button variant="ghost" size="sm" onClick={toggleTheme} title={theme === 'light' ? 'Dark Mode' : 'Light Mode'}>
+                    <Button variant="ghost" size="sm" onClick={toggleTheme} title={theme === 'light' ? 'Dark Mode' : 'Light Mode'} className="hidden-mobile">
                         {theme === 'light' ? <Moon size={20} /> : <Sun size={20} />}
                     </Button>
-                    <Button variant="ghost" size="sm">
+                    <Button variant="ghost" size="sm" className="hidden-mobile">
                         <Search size={20} />
                     </Button>
                     <Link to="/cart">
@@ -74,22 +105,60 @@ export const Header = () => {
 
                     {isAuthenticated ? (
                         <>
-                            <Link to="/account" title="Account">
+                            <Link to="/account" title="Account" className="hidden-mobile">
                                 <Button variant="ghost" size="sm">
                                     <User size={20} />
                                 </Button>
                             </Link>
-                            <Button variant="ghost" size="sm" onClick={handleLogout} title="Logout">
+                            <Button variant="ghost" size="sm" onClick={handleLogout} title="Logout" className="hidden-mobile">
                                 <LogOut size={20} />
                             </Button>
                         </>
                     ) : (
-                        <Link to="/login">
+                        <Link to="/login" className="hidden-mobile">
                             <Button variant="ghost" size="sm">
                                 <User size={20} />
                             </Button>
                         </Link>
                     )}
+
+                    {/* Mobile Menu Button */}
+                    <div className={styles.mobileMenuBtn}>
+                        <Button variant="ghost" size="sm" onClick={toggleMenu}>
+                            {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
+                        </Button>
+                    </div>
+                </div>
+
+                {/* Mobile Menu Overlay */}
+                <div className={clsx(styles.mobileMenu, isMenuOpen && styles.open)}>
+                    <NavLinks />
+
+                    <div className={styles.mobileActions}>
+                        <Button variant="outline" onClick={toggleTheme} style={{ justifyContent: 'flex-start' }}>
+                            {theme === 'light' ? <Moon size={20} className="mr-2" /> : <Sun size={20} className="mr-2" />}
+                            {theme === 'light' ? 'Dark Mode' : 'Light Mode'}
+                        </Button>
+
+                        {isAuthenticated ? (
+                            <>
+                                <Link to="/account" style={{ width: '100%' }}>
+                                    <Button variant="outline" style={{ width: '100%', justifyContent: 'flex-start' }}>
+                                        <User size={20} style={{ marginRight: '0.5rem' }} /> Account
+                                    </Button>
+                                </Link>
+                                <Button variant="outline" onClick={handleLogout} style={{ width: '100%', justifyContent: 'flex-start', color: '#ef4444', borderColor: '#ef4444' }}>
+                                    <LogOut size={20} style={{ marginRight: '0.5rem' }} /> Logout
+                                </Button>
+                            </>
+                        ) : (
+                            <Link to="/login" style={{ width: '100%' }}>
+                                <Button variant="primary" style={{ width: '100%' }}>
+                                    Sign In
+                                </Button>
+                            </Link>
+                        )}
+                    </div>
                 </div>
             </div>
         </header>

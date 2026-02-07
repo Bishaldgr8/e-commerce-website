@@ -28,6 +28,8 @@
     display: flex;
     align-items: center;
     gap: 0.5rem;
+    z-index: 60;
+    /* Ensure logo is above mobile menu */
 }
 
 .nav {
@@ -55,4 +57,60 @@
     display: flex;
     align-items: center;
     gap: 1rem;
+}
+
+/* Mobile Menu Styles */
+.mobileMenuBtn {
+    display: none;
+    z-index: 60;
+}
+
+.mobileMenu {
+    display: none;
+}
+
+@media (max-width: 768px) {
+    .nav {
+        display: none;
+    }
+
+    .mobileMenuBtn {
+        display: block;
+    }
+
+    .mobileMenu {
+        display: flex;
+        flex-direction: column;
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: var(--color-background);
+        padding: 5rem 1.5rem 2rem;
+        z-index: 55;
+        transform: translateX(100%);
+        transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        overflow-y: auto;
+    }
+
+    .mobileMenu.open {
+        transform: translateX(0);
+        display: flex;
+    }
+
+    .mobileMenu .navLink {
+        font-size: 1.5rem;
+        padding: 1rem 0;
+        border-bottom: 1px solid var(--color-slate-100);
+        width: 100%;
+    }
+
+    .mobileActions {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        margin-top: 2rem;
+        width: 100%;
+    }
 }
